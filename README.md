@@ -177,7 +177,7 @@ During MIRSeg training, the curriculum begins with full-input supervised trainin
 
 ## License
 
-This project is released under the Apache License 2.0. See [LICENSE](LICENSE) for details.
+This project is released under the Apache License 2.0.
 
 This repository is intended for research and reproducibility purposes. It has not been validated, certified, or approved as a clinical medical device.
 
@@ -189,6 +189,5 @@ The associated manuscript is a NeurIPS submission titled:
 MIRSeg: Missing-Input Reconciliation for 3D Glioma MRI Segmentation under Reduced Observability
 ```
 
-Please cite the public paper version when it becomes available. A formal BibTeX entry is not included because the archival citation has not been provided in the release materials.
-
+Please cite the public paper version when it becomes available. 
 
