@@ -1,8 +1,6 @@
 # MIRSeg: Missing-Input Reconciliation for 3D Glioma MRI Segmentation
 
-This repository contains a cleaned public implementation of **MIRSeg** (also developed under the UniCIR-3D naming in the internal codebase): a setting-aware 3D glioma MRI segmentation model for reduced-observability deployment. The release keeps the core method implementation and removes internal cluster scripts, private paths, generated outputs, run logs, ablation wrappers, and unrelated prototype branches.
-
-The code is intended for research use with preprocessed, co-registered 3D multiparametric MRI volumes. It does not include data, trained weights, private manifests, or institution-specific preprocessing pipelines.
+This repository contains a public implementation of **MIRSeg**: a setting-aware 3D glioma MRI segmentation model for reduced-observability deployment. The release keeps the core method implementation. The code is intended for research use with preprocessed, co-registered 3D multiparametric MRI volumes. It does not include data, trained weights, private manifests, or institution-specific preprocessing pipelines.
 
 ## Method summary
 
@@ -56,32 +54,14 @@ This release was distilled from an audited research environment. The public code
 
 ### Recommended conda installation
 
-The audited environment used Python 3.10.13, PyTorch 2.5.1, and `pytorch-cuda=12.4`. The public `environment.yml` keeps the core runtime/training packages and removes private prefixes and unrelated dependencies.
+The environment used Python 3.10.13, PyTorch 2.5.1, and `pytorch-cuda=12.4`.
 
 ```bash
 conda env create -f environment.yml
 conda activate mirseg
 ```
 
-Sanity-check the installation:
-
-```bash
-python - <<'PY'
-import torch
-import nibabel
-import numpy
-import scipy
-import yaml
-import tqdm
-
-print("torch:", torch.__version__)
-print("CUDA available:", torch.cuda.is_available())
-PY
-```
-
 ### Optional pip installation
-
-Use a clean Python 3.10 environment. The audited pip environment recorded `torch==2.5.1`, but pip requirement files do not encode the CUDA wheel selector. For GPU systems, install a PyTorch 2.5.1 wheel compatible with your local CUDA/driver stack, then install the remaining packages.
 
 ```bash
 python -m venv .venv
@@ -98,28 +78,17 @@ pip install numpy==1.26.4 scipy==1.15.3 nibabel==5.3.2 PyYAML==6.0.2 tqdm==4.67.
 
 ### Key package versions
 
-| Package | Version recorded in audit | Public-release use |
 |---|---:|---|
 | Python | 3.10.13 | Runtime used for the audit; public env pins Python 3.10. |
 | PyTorch | 2.5.1 | Required for model training and inference. |
-| `pytorch-cuda` | 12.4 | Included in the recommended conda GPU environment because it was recorded in the audit. |
 | NumPy | 1.26.4 | Required for array handling and metric aggregation. |
 | SciPy | 1.15.3 | Required for connected components and surface-distance metrics. |
 | NiBabel | 5.3.2 | Required for NIfTI image loading and saving. |
 | PyYAML | 6.0.2 | Required for configuration files. |
-| tqdm | 4.67.1 | Required for progress bars during training/evaluation. |
 
-The audit also recorded MONAI 1.5.0, torchvision 0.20.1, torchaudio 2.5.1, scikit-learn 1.6.1, pandas 2.2.3, matplotlib 3.9.1, SimpleITK 2.2.1, einops 0.8.1, and other packages. These are not included in the public minimal dependency files because they are not required by the current public MIRSeg release.
-
-### CUDA and PyTorch compatibility notes
-
-The audited conda environment contained `pytorch=2.5.1` with `pytorch-cuda=12.4`. It also contained several lower-level CUDA runtime packages from the internal solver. The public environment keeps only the PyTorch CUDA metapackage and does not specify GPU model, driver version, or cluster module requirements, because those details were not provided as portable public requirements.
-
-For CPU-only use or for systems using a different CUDA stack, adjust only the PyTorch installation while keeping the remaining package versions unchanged.
+Other packages included MONAI 1.5.0, torchvision 0.20.1, torchaudio 2.5.1, scikit-learn 1.6.1, pandas 2.2.3, matplotlib 3.9.1, SimpleITK 2.2.1, and einops 0.8.1.
 
 ### Reproducibility notes
-
-The public installation files are intentionally not a full clone of the internal environment. They remove private paths, editable internal packages, GADI-specific prefixes, and unrelated analysis/debugging packages. Numerical reproduction of paper results still depends on using the same data preprocessing, manifest/split definitions, model configuration, random seeds, and checkpoints. The environment files only define the software dependencies needed to run the released code.
 
 ## Expected data format
 
