@@ -78,6 +78,7 @@ pip install numpy==1.26.4 scipy==1.15.3 nibabel==5.3.2 PyYAML==6.0.2 tqdm==4.67.
 
 ### Key package versions
 
+| Package | Version | Public-release use |
 |---|---:|---|
 | Python | 3.10.13 | Runtime used for the audit; public env pins Python 3.10. |
 | PyTorch | 2.5.1 | Required for model training and inference. |
