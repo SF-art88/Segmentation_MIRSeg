@@ -1,0 +1,6 @@
+torch==2.5.1
+numpy==1.26.4
+scipy==1.15.3
+nibabel==5.3.2
+PyYAML==6.0.2
+tqdm==4.67.1
