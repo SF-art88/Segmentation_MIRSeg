@@ -85,7 +85,7 @@ pip install numpy==1.26.4 scipy==1.15.3 nibabel==5.3.2 PyYAML==6.0.2 tqdm==4.67.
 | NiBabel | 5.3.2 | Required for NIfTI image loading and saving. |
 | PyYAML | 6.0.2 | Required for configuration files. |
 
-Other packages included MONAI 1.5.0, torchvision 0.20.1, torchaudio 2.5.1, scikit-learn 1.6.1, pandas 2.2.3, matplotlib 3.9.1, SimpleITK 2.2.1, and einops 0.8.1.
+Other packages includes MONAI 1.5.0, torchvision 0.20.1, torchaudio 2.5.1, scikit-learn 1.6.1, pandas 2.2.3, matplotlib 3.9.1, SimpleITK 2.2.1, and einops 0.8.1.
 
 ### Reproducibility notes
 
