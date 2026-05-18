@@ -217,6 +217,4 @@ MIRSeg: Missing-Input Reconciliation for 3D Glioma MRI Segmentation under Reduce
 
 Please cite the public paper version when it becomes available. A formal BibTeX entry is not included because the archival citation has not been provided in the release materials.
 
-## Limitations
 
-This repository is a cleaned public research-code release, not a full clinical deployment package. It intentionally omits private manifests, private data paths, HPC/PBS scripts, generated experiment outputs, internal logs, and unrelated prototype branches. The code assumes preprocessed, co-registered NIfTI inputs and does not reproduce hidden preprocessing pipelines. No trained weights are included. Stress testing through synthetic masking/corruption should not be interpreted as proof of robustness to prospectively acquired incomplete clinical protocols. A license file is not included because no release license was provided; add one before public distribution.
