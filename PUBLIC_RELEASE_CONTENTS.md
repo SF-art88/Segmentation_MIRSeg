@@ -31,6 +31,8 @@ logs/
 
 ## `README.md`
 
+# MIRSeg: Missing-Input Reconciliation for 3D Glioma MRI Segmentation
+
 This repository contains a public implementation of **MIRSeg**: a setting-aware 3D glioma MRI segmentation model for reduced-observability deployment. The release keeps the core method implementation. The code is intended for research use with preprocessed, co-registered 3D multiparametric MRI volumes. It does not include data, trained weights, private manifests, or institution-specific preprocessing pipelines.
 
 ## Method summary
