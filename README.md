@@ -175,6 +175,12 @@ The public implementation includes the stress families used by the method:
 
 During MIRSeg training, the curriculum begins with full-input supervised training, then activates missing-modality reconciliation, and later introduces corrupted-present augmentation. The default curriculum is defined in `configs/mirseg.yaml`.
 
+## License
+
+This project is released under the Apache License 2.0. See [LICENSE](LICENSE) for details.
+
+This repository is intended for research and reproducibility purposes. It has not been validated, certified, or approved as a clinical medical device.
+
 ## Citation note
 
 The associated manuscript is a NeurIPS submission titled:
