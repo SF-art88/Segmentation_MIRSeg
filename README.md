@@ -50,8 +50,6 @@ README.md
 
 ## Installation
 
-This release was distilled from an audited research environment. The public code requires only PyTorch, basic numerical/scientific Python packages, NIfTI I/O, YAML config parsing, and progress reporting. The full internal environment was not copied because it included private cluster paths, editable internal packages, and many packages unrelated to the public MIRSeg implementation.
-
 ### Recommended conda installation
 
 The environment used Python 3.10.13, PyTorch 2.5.1, and `pytorch-cuda=12.4`.
