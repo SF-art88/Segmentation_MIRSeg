@@ -31,12 +31,7 @@ logs/
 
 ## `README.md`
 
-```markdown
-# MIRSeg: Missing-Input Reconciliation for 3D Glioma MRI Segmentation
-
-This repository contains a cleaned public implementation of **MIRSeg** (also developed under the UniCIR-3D naming in the internal codebase): a setting-aware 3D glioma MRI segmentation model for reduced-observability deployment. The release keeps the core method implementation and removes internal cluster scripts, private paths, generated outputs, run logs, ablation wrappers, and unrelated prototype branches.
-
-The code is intended for research use with preprocessed, co-registered 3D multiparametric MRI volumes. It does not include data, trained weights, private manifests, or institution-specific preprocessing pipelines.
+This repository contains a public implementation of **MIRSeg**: a setting-aware 3D glioma MRI segmentation model for reduced-observability deployment. The release keeps the core method implementation. The code is intended for research use with preprocessed, co-registered 3D multiparametric MRI volumes. It does not include data, trained weights, private manifests, or institution-specific preprocessing pipelines.
 
 ## Method summary
 
@@ -86,22 +81,44 @@ README.md
 
 ## Installation
 
-Create an environment with PyTorch and the lightweight medical-imaging dependencies:
+### Recommended conda installation
+
+The environment used Python 3.10.13, PyTorch 2.5.1, and `pytorch-cuda=12.4`.
 
 ```bash
 conda env create -f environment.yml
 conda activate mirseg
 ```
 
-or:
+### Optional pip installation
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-A `setup.py` file is intentionally not included because this release is a small research-code drop. Run the provided scripts from the repository root.
+If PyTorch must be installed separately for your platform, install it first, then install the non-PyTorch dependencies:
+
+```bash
+pip install numpy==1.26.4 scipy==1.15.3 nibabel==5.3.2 PyYAML==6.0.2 tqdm==4.67.1
+```
+
+### Key package versions
+
+| Package | Version | Public-release use |
+|---|---:|---|
+| Python | 3.10.13 | Runtime used for the audit; public env pins Python 3.10. |
+| PyTorch | 2.5.1 | Required for model training and inference. |
+| NumPy | 1.26.4 | Required for array handling and metric aggregation. |
+| SciPy | 1.15.3 | Required for connected components and surface-distance metrics. |
+| NiBabel | 5.3.2 | Required for NIfTI image loading and saving. |
+| PyYAML | 6.0.2 | Required for configuration files. |
+
+Other packages includes MONAI 1.5.0, torchvision 0.20.1, torchaudio 2.5.1, scikit-learn 1.6.1, pandas 2.2.3, matplotlib 3.9.1, SimpleITK 2.2.1, and einops 0.8.1.
+
+### Reproducibility notes
 
 ## Expected data format
 
@@ -189,6 +206,12 @@ The public implementation includes the stress families used by the method:
 
 During MIRSeg training, the curriculum begins with full-input supervised training, then activates missing-modality reconciliation, and later introduces corrupted-present augmentation. The default curriculum is defined in `configs/mirseg.yaml`.
 
+## License
+
+This project is released under the Apache License 2.0.
+
+This repository is intended for research and reproducibility purposes. It has not been validated, certified, or approved as a clinical medical device.
+
 ## Citation note
 
 The associated manuscript is a NeurIPS submission titled:
@@ -197,12 +220,7 @@ The associated manuscript is a NeurIPS submission titled:
 MIRSeg: Missing-Input Reconciliation for 3D Glioma MRI Segmentation under Reduced Observability
 ```
 
-Please cite the public paper version when it becomes available. A formal BibTeX entry is not included because the archival citation has not been provided in the release materials.
-
-## Limitations
-
-This repository is a cleaned public research-code release, not a full clinical deployment package. It intentionally omits private manifests, private data paths, HPC/PBS scripts, generated experiment outputs, internal logs, and unrelated prototype branches. The code assumes preprocessed, co-registered NIfTI inputs and does not reproduce hidden preprocessing pipelines. No trained weights are included. Stress testing through synthetic masking/corruption should not be interpreted as proof of robustness to prospectively acquired incomplete clinical protocols. A license file is not included because no release license was provided; add one before public distribution.
-```
+Please cite the public paper version when it becomes available. 
 
 ## `configs/baseline.yaml`
 
