@@ -1,0 +1,67 @@
+# Public MIRSeg configuration. Replace data.manifest with your local CSV.
+model:
+  name: mirseg
+  backbone:
+    stem_channels: 32
+    encoder_channels: [64, 96, 128, 160]
+    decoder_channels: 96
+    dropout: 0.0
+  heads:
+    num_classes_pre: 4
+    num_classes_post: 5
+  deep_supervision: learned
+  enable_subset_correction: true
+
+data:
+  manifest: examples/manifest_template.csv  # TODO: replace with your manifest CSV
+  train_split: train
+  val_split: val
+  patch_size: [96, 96, 96]
+  positive_crop_probability: 0.7
+  percentile_clip: [0.5, 99.5]
+  normalize_nonzero: true
+  ignore_index: -1
+  label_maps:
+    # BraTS 2021 raw labels: 0 background, 1 NCR/NET, 2 edema, 4 enhancing tumor.
+    pre: {0: 0, 1: 2, 2: 1, 4: 3}
+    # BraTS-PTG/post-treatment labels are expected to be contiguous here.
+    post: {0: 0, 1: 1, 2: 2, 3: 3, 4: 4}
+
+loss:
+  feature_weight: 1.0
+  logit_weight: 1.0
+  logit_temperature: 1.0
+
+runtime:
+  seed: 42
+  device: cuda
+  num_workers: 0
+  num_threads: 4
+  sliding_window_roi: [96, 96, 96]
+  sliding_window_overlap: 0.5
+
+train:
+  output_dir: experiments/mirseg
+  batch_size: 2
+  num_epochs: 60
+  lr: 3.0e-4
+  weight_decay: 1.0e-4
+  eps: 1.0e-8
+  min_lr: 1.0e-6
+  max_grad_norm: 5.0
+  warmstart_checkpoint: ""  # Optional: path to a baseline best.pt.
+  curriculum:
+    full_only_epochs: 8
+    tier_c_start_epoch: 16
+    missing:
+      tiers: [B, C]
+      tier_probabilities: {B: 0.60, C: 0.40}
+    corruption:
+      start_epoch: 36
+      moderate_start_epoch: 46
+      p_case: 0.5
+      mild_max_modalities: 1
+      moderate_max_modalities: 2
+      mild_severity_range: [0.10, 0.35]
+      moderate_severity_range: [0.35, 0.70]
+      types: [motion, bias, noise, contrast, registration, blur, gibbs]
