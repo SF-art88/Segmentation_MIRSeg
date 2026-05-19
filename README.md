@@ -85,8 +85,6 @@ pip install numpy==1.26.4 scipy==1.15.3 nibabel==5.3.2 PyYAML==6.0.2 tqdm==4.67.
 | NiBabel | 5.3.2 | Required for NIfTI image loading and saving. |
 | PyYAML | 6.0.2 | Required for configuration files. |
 
-Other packages includes MONAI 1.5.0, torchvision 0.20.1, torchaudio 2.5.1, scikit-learn 1.6.1, pandas 2.2.3, matplotlib 3.9.1, SimpleITK 2.2.1, and einops 0.8.1.
-
 ### Reproducibility notes
 
 ## Expected data format
@@ -110,8 +108,8 @@ Each manifest row represents one study/timepoint. Required columns are:
 
 Default label conventions are configurable in the YAML files. The shipped defaults are:
 
-- pre-treatment: `0=background`, `1=edema`, `2=non-enhancing/necrotic core`, `3=enhancing tumor`, after remapping BraTS 2021 raw labels `{0:0, 1:2, 2:1, 4:3}`;
-- post-treatment: `0=background`, `1=enhancing tissue`, `2=non-enhancing tumor core`, `3=surrounding non-enhancing FLAIR hyperintensity`, `4=resection cavity`, assuming contiguous labels.
+- pre-treatment: `edema`, `non-enhancing/necrotic core`, `enhancing tumor`;
+- post-treatment: `enhancing tissue`, `non-enhancing tumor core`, `surrounding non-enhancing FLAIR hyperintensity`, `resection cavity`.
 
 ## Training
 
